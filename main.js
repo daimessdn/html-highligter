@@ -13,7 +13,7 @@ explanationDescription.forEach((item, index) => {
     explanationLabel[index].classList.add("explanation-hovered");
 
     // // toggle auto-scroll
-    // explanationLabel[index].scrollIntoView();
+    explanationLabel[index].scrollIntoView({ behavior: "smooth" });
     // }
   });
 

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>highlight html</title>
 
-    <link rel="stylesheet" href="./main.css" />
+    <link rel="stylesheet" href="../../main.css" />
     <link
       rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css"
@@ -15,11 +15,9 @@
   </head>
   <body>
     <section id="explanation">
-      <h1>How to apply clipboard on React Native (Bare workflow)</h1>
+      <h1>How to apply clipboard on React Native (Expo manage workflow)</h1>
       <ol>
-        <li class="explanation-item">
-          Import <code>@react-native-commmunity/clipboard</code>.
-        </li>
+        <li class="explanation-item">Import <code>expo-clipboard</code>.</li>
 
         <li class="explanation-item">
           Add state for storing clipboard text to be copied.
@@ -47,45 +45,30 @@
       </ol>
     </section>
 
-    <pre><code>import React, {useState} from 'react';
-import {
-    SafeAreaView,
-    View,
-    Text,
-    TouchableOpacity,
-    StyleSheet,
-} from 'react-native';
-<span class="explanation-point">import Clipboard from '@react-native-commmunity/clipboard';</span>
+    <pre><code>import * as React from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
+<span class="explanation-point">import * as Clipboard from 'expo-clipboard';</span>
 
-const App = () =&gt; {
-    <span class="explanation-point">const [copiedText, setCopiedText] = useState('');</span>
+export default function App() {
+    <span class="explanation-point">const [copiedText, setCopiedText] = React.useState('');</span>
 
-    <span class="explanation-point">const copyToClipboard = () =&gt; {
-        Clipboard.setString('hello world');
+    <span class="explanation-point">const copyToClipboard = async () =&gt; {
+        await Clipboard.setStringAsync('hello world');
     };</span>
 
     <span class="explanation-point">const fetchCopiedText = async () =&gt; {
-        const text = await Clipboard.getString();
+        const text = await Clipboard.getStringAsync();
         setCopiedText(text);
     };</span>
 
     return (
-        &lt;SafeAreaView style={{flex: 1}}&gt;
-            &lt;View style={styles.container}&gt;
-            
-            <span class="explanation-point">&lt;TouchableOpacity onPress={copyToClipboard}&gt;
-                &lt;Text&gt;Click here to copy to Clipboard&lt;/Text&gt;
-            &lt;/TouchableOpacity&gt;</span>
-            
-            <span class="explanation-point">&lt;TouchableOpacity onPress={fetchCopiedText}&gt;
-                &lt;Text&gt;View copied text&lt;/Text&gt;
-            &lt;/TouchableOpacity&gt;</span>
-
+        &lt;View style={styles.container}&gt;
+            <span class="explanation-point">&lt;Button title="Click here to copy to Clipboard" onPress={copyToClipboard} /&gt;</span>
+            <span class="explanation-point">&lt;Button title="View copied text" onPress={fetchCopiedText} /&gt;</span>
             <span class="explanation-point">&lt;Text style={styles.copiedText}&gt;{copiedText}&lt;/Text&gt;</span>
-            &lt;/View&gt;
-        &lt;/SafeAreaView&gt;
+        &lt;/View&gt;
     );
-};
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -93,14 +76,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-        copiedText: {
+    copiedText: {
         marginTop: 10,
         color: 'red',
     },
-});
+});</code></pre>
 
-export default App;</code></pre>
-
-    <script src="./main.js"></script>
+    <script src="../../main.js"></script>
   </body>
 </html>

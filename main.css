@@ -24,6 +24,8 @@ body {
 pre {
     padding: 6px;
     height: 100%;
+
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
 }
 
 pre, code {
@@ -38,6 +40,7 @@ pre, code {
   color: #fff;
 
   overflow-x: auto;
+  word-wrap: break-word;
 }
 
 code {
@@ -47,6 +50,13 @@ code {
 #explanation {
   width: 50%;
   padding: 12px 12px 12px 24px;
+
+  height: 100%;
+  background-color: #FFF740;
+}
+
+#explanation h1 {
+  line-height: 32px;
 }
 
 #explanation ol {
@@ -61,7 +71,7 @@ code {
 }
 
 .explanation-hovered {
-  background-color: #ffd000;
+  background-color: #ffd866;
   color: #222;
   border-radius: 6px;
 }
