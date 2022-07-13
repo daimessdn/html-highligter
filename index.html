@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>highlight html</title>
+
+    <style>
+        body {
+            line-height: 24px;
+
+            display: flex;
+            position: relative;
+        }
+
+        pre {
+            line-height: 18px;
+            width: 50%;
+        }
+
+        #explanation {
+            width: 50%;
+
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 2;
+        }
+
+        .explanation-point {
+            /* transition: all .4s ease; */
+        }
+
+        .explanation-hovered {
+            background-color: #ffd000;
+        }
+
+        .explanation-item {
+            cursor: pointer;
+            margin: 3px;
+        }
+        
+    </style>
+</head>
+<body>
+    <pre><code>import React, {useState} from 'react';
+import {
+    SafeAreaView,
+    View,
+    Text,
+    TouchableOpacity,
+    StyleSheet,
+} from 'react-native';
+<span class="explanation-point">import Clipboard from '@react-native-clipboard/clipboard';</span>
+
+const App = () =&gt; {
+    <span class="explanation-point">const [copiedText, setCopiedText] = useState('');</span>
+
+    <span class="explanation-point">const copyToClipboard = () =&gt; {
+        Clipboard.setString('hello world');
+    };</span>
+
+    <span class="explanation-point">const fetchCopiedText = async () =&gt; {
+        const text = await Clipboard.getString();
+        setCopiedText(text);
+    };</span>
+
+    return (
+        &lt;SafeAreaView style={{flex: 1}}&gt;
+            &lt;View style={styles.container}&gt;
+            
+            <span class="explanation-point">&lt;TouchableOpacity onPress={copyToClipboard}&gt;
+                &lt;Text&gt;Click here to copy to Clipboard&lt;/Text&gt;
+            &lt;/TouchableOpacity&gt;</span>
+            
+            <span class="explanation-point">&lt;TouchableOpacity onPress={fetchCopiedText}&gt;
+                &lt;Text&gt;View copied text&lt;/Text&gt;
+            &lt;/TouchableOpacity&gt;</span>
+
+            <span class="explanation-point">&lt;Text style={styles.copiedText}&gt;{copiedText}&lt;/Text&gt;</span>
+            &lt;/View&gt;
+        &lt;/SafeAreaView&gt;
+    );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+        copiedText: {
+        marginTop: 10,
+        color: 'red',
+    },
+});
+
+export default App;</code></pre>
+
+    <ol id="explanation">
+        <li class="explanation-item">Import <code>@react-native-clipboard/clipboard</code>.</li>
+        <li class="explanation-item">Add state for storing clipboard text to be copied.</li>
+        <li class="explanation-item">Create function to set the string (copy string) called <code>copyToClipboard</code>.</li>
+        <li class="explanation-item">Create function to get the string (paste string) called <code>fetchCopiedText</code>.</li>
+        <li class="explanation-item">Apply <code>copyToClipboard</code> function in a touchable button.</li>
+        <li class="explanation-item">Apply <code>fetchCopiedText</code> function in a touchable button.</li>
+        <li class="explanation-item">Output pasted text.</li>
+    </ol>
+
+    <script>
+        const explanationLabel = Array.from(document.querySelectorAll(".explanation-point"));
+        const explanationDescription = Array.from(document.querySelectorAll(".explanation-item"));
+
+        explanationDescription.forEach((item, index) => {
+            item.addEventListener("mouseover", (e) => {
+                console.log("ini ketika hover", e.target)
+                if (e.target.classList.contains("explanation-item")) {
+                    // explanationLabel[index].classList.toggle("explanation-hovered");
+                    explanationLabel[index].classList.add("explanation-hovered");
+                }
+            });
+
+            item.addEventListener("mouseleave", (e) => {
+                console.log("ini ketika leave", e.target)
+                if (e.target.classList.contains("explanation-item")) {
+                    // explanationLabel[index].classList.toggle("explanation-hovered");
+                    explanationLabel[index].classList.remove("explanation-hovered");
+                }
+            });
+        })
+    </script>
+</body>
+</html>
